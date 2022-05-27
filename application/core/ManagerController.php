@@ -3,9 +3,9 @@ class ManagerController extends CI_Controller {
   public function __construct () {
     parent::__construct();
 
-    $sessionUser = $this->getUserOrRedirect();
-
     $this->load->library('parser');
+
+    $sessionUser = $this->getUserOrRedirect();
 
     $this->load->model('ProfileModel');
     $this->data['user'] = $this->user = $this->ProfileModel->getByPrimary($sessionUser['id']);

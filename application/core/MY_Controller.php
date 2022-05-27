@@ -10,7 +10,13 @@ class MainController extends CI_Controller {
   protected function __construct () {
     parent::__construct();
 
-    $this->user = $this->getUserOrRedirect();
+    $sessionUser = $this->getUserOrRedirect();
+
+    $this->load->model('UserModel');
+    $this->data['user'] = $this->user = $this->UserModel->getByPrimary($sessionUser['id']);
+
+    $this->load->model('FunctionalityModel');
+    $this->data['functionalities'] = $this->FunctionalityModel->getAllByUserId($this->user->id);
 
     $this->load->vars($this->data);
   }
