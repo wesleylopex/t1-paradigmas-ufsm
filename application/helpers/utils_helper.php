@@ -1,23 +1,23 @@
 <?php if (!defined('BASEPATH')) exit('No direct script acess allowed');
 
-function encode_crip ($string) {
-  return hashPassword($string);
+function encode_crip (string $text) {
+  return hashPassword($text);
 }
 
-function decode_crip ($string) {
-  return base64_decode($string);
+function decode_crip (string $text) {
+  return base64_decode($text);
 }
 
-function hashPassword ($password) {
+function hashPassword (string $password) {
   $options = ['cost' => 12];
   return password_hash($password, PASSWORD_BCRYPT, $options);
 }
 
-function compareHash ($password, $hash) {
+function compareHash (string $password, string $hash): bool {
   return password_verify($password, $hash);
 }
 
-function setFileName (string $fileName) {
+function setFileName (string $fileName): string {
   $fileInfo = pathinfo($fileName);
   $extension = $fileInfo['extension'];
   $fileName = $fileInfo['filename'];
@@ -25,7 +25,7 @@ function setFileName (string $fileName) {
   return slugify($fileName). '-' . date('d-m-Y') . ".$extension";
 }
 
-function normalize ($string) {
+function normalize (string $text): string {
   $table = [
     'Š' => 'S', 'š' => 's', 'Đ' => 'Dj', 'đ' => 'dj', 'Ž' => 'Z', 'ž' => 'z', 'Č' => 'C', 'č' => 'c', 'Ć' => 'C', 'ć' => 'c',
     'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'A', 'Ç' => 'C', 'È' => 'E', 'É' => 'E',
@@ -37,10 +37,10 @@ function normalize ($string) {
     'ÿ' => 'y', 'Ŕ' => 'R', 'ŕ' => 'r',
   ];
 
-  return strtr($string, $table);
+  return strtr($text, $table);
 }
 
-function slugify ($text) {
+function slugify (string $text): string {
   $text = normalize($text);
   $text = preg_replace('~[^\pL\d]+~u', '-', $text);
   $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
@@ -56,7 +56,7 @@ function slugify ($text) {
   return $text;
 }
 
-function antiInjection ($field, $addSlashes = false) {
+function antiInjection (string $field, bool $addSlashes = false): string {
   $field = preg_replace('/(from|alter table|select|insert|delete|update|where|drop table|show tables|#|\*|--|\\\\)/i', '', $field);
   $field = trim($field);
   $field = strip_tags($field);
@@ -68,7 +68,7 @@ function antiInjection ($field, $addSlashes = false) {
   return $field;
 }
 
-function validEmail (string $email) {
+function emailIsValid (string $email): bool {
   $email = filter_var($email, FILTER_SANITIZE_EMAIL);
   
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
