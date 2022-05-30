@@ -40,7 +40,7 @@
   })
 
   function initTippy () {
-    const tippies = document.querySelectorAll('.tippy')
+    const tippies = document.querySelectorAll('[data-tippy-content]')
     tippy(tippies)
   }
 

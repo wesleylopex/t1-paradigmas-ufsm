@@ -16,6 +16,16 @@ class MY_Model extends CI_Model {
     }
   }
 
+  public function save (array $data) {
+    if (array_key_exists($this->primary, $data) && !empty($data[$this->primary])) {
+      return $this->update($data);
+    }
+
+    unset($data[$this->primary]);
+
+    return $this->create($data);
+  }
+
   public function create ($data)  {
     if ($this->db->insert($this->table, $data)) {
       return $this->db->insert_id();

@@ -1,9 +1,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title>Gootag - Manager</title>
+<title>T1 Paradigmas UFSM</title>
 <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 
 <!-- Favicon -->
-<link rel="shortcut icon" href="<?= base_url('assets/admin/img/company/gootag-favicon.png') ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="" type="image/x-icon" />
 
 <!-- Fonts and icons -->
 <script src="<?= base_url('assets/admin/js/plugin/webfont/webfont.min.js') ?>"></script>
@@ -17,9 +17,9 @@
             urls: ['<?= base_url('assets/admin/css/fonts.css') ?>']
         },
         active: function () {
-            sessionStorage.fonts = true;
+            sessionStorage.fonts = true
         }
-    });
+    })
 </script>
 
 <!-- CSS Files -->
@@ -30,3 +30,4 @@
 <link rel="stylesheet" href="<?= base_url('assets/admin/plugins/summernote/dist/summernote-bs4.css') ?>">
 
 <link rel="stylesheet" href="<?= base_url('assets/admin/css/tailwindcss/tailwind.css') ?>" />
+<link rel="stylesheet" href="<?= base_url('assets/website/styles/tailwindcss/tailwind.css') ?>" />

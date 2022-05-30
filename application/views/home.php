@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <?php $this->load->view('imports/head.php', $this->data) ?>
+  <?php $this->load->view('imports/head', $this->data) ?>
 </head>
 <body data-background-color="bg3">
 	<div class="wrapper">
-  <?php $this->load->view('imports/header.php', $this->data) ?>
+  	<?php $this->load->view('imports/header', $this->data) ?>
 		<div class="main-panel">
 			<div class="content">
 				<div class="container-fluid">
@@ -1042,6 +1042,6 @@
 			</div>
 		</div>
 	</div>
-  <?php $this->load->view('imports/scripts.php', $this->data) ?>
+  <?php $this->load->view('imports/scripts', $this->data) ?>
 </body>
 </html>

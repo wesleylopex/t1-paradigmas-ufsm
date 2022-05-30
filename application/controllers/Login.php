@@ -23,7 +23,7 @@ class Login extends CI_Controller {
 
     $email = antiInjection($this->input->post('email'));
 
-    if (!validEmail($email)) {
+    if (!emailIsValid($email)) {
       $this->session->set_flashdata('error', 'Email inválido');
       return redirect('login');
     }
