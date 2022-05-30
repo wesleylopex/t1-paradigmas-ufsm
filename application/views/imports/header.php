@@ -15,23 +15,6 @@
   <nav class="navbar navbar-header navbar-expand-lg" data-background-color="primary">
     <div class="container-fluid">
       <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-        <li data-tippy-content="QRCode" class="tippy nav-item mr-20px cursor-pointer">
-          <a href="<?= base_url('download') ?>" class="nav-link text-white flex items-center">
-            <i data-feather="download"></i>
-          </a>
-        </li>
-        <li data-tippy-content="Copiar URL" data-copy-text="" class="tippy copy-to-clipboard nav-item mr-20px cursor-pointer">
-          <div class="nav-link text-white flex items-center">
-            <i data-feather="copy"></i>
-          </div>
-        </li>
-        <li data-tippy-content="Ver perfil" class="tippy nav-item mr-20px">
-          <a class="nav-link" href="" target="_blank">
-            <div>
-              <i data-feather="globe"></i>
-            </div>
-          </a>
-        </li>
         <li data-tippy-content="Opções" class="tippy nav-item dropdown hidden-caret">
           <span class="nav-link d-flex dropdown-toggle color-white cursor-pointer" data-toggle="dropdown" href="" aria-expanded="false">
             <i data-feather="settings"></i>
@@ -40,7 +23,7 @@
             <li>
               <div class="user-box">
                 <div class="u-text">
-                  <h4>Wesley Lopes</h4>
+                  <h4><?= $user->name ?></h4>
                 </div>
               </div>
             </li>
