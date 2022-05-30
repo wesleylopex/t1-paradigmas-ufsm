@@ -16,7 +16,7 @@
     <div class="container-fluid">
       <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
         <li data-tippy-content="QRCode" class="tippy nav-item mr-20px cursor-pointer">
-          <a href="<?= base_url('manager/download') ?>" class="nav-link text-white flex items-center">
+          <a href="<?= base_url('download') ?>" class="nav-link text-white flex items-center">
             <i data-feather="download"></i>
           </a>
         </li>
@@ -76,7 +76,7 @@
           <h4 class="text-section">Sair do sistema</h4>
         </li>
         <li class="nav-item">
-          <a href="<?= site_url('manager/login/logout') ?>">
+          <a href="<?= site_url('login/logout') ?>">
             <i data-feather="log-out" class="transform rotate-180"></i>
             <p>Sair</p>
           </a>

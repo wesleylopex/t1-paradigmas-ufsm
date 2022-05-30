@@ -1,38 +1,50 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Books extends MainController {
+	private $functionalitySlug = 'books';
+
   function __construct () {
     parent::__construct();
 
 		$this->load->model('FunctionalityModel');
-		$this->functionality = $this->data['functionality'] = $this->FunctionalityModel->getRowWhere(['slug' => 'books']);
+		$this->functionality = $this->data['functionality'] = $this->FunctionalityModel->getRowWhere(['slug' => $this->functionalitySlug]);
 
 		$this->load->model('PermissionModel');
-    $this->permissions = $this->data['permissions'] = $this->PermissionModel->getPermissionsByUser('books', $this->user->id);
+    $this->permissions = $this->data['permissions'] = $this->PermissionModel->getPermissionsByUser($this->functionalitySlug, $this->user->id);
 	}
 
 	public function index () {
-		$this->load->model('BookModel');
-		$this->data['books'] = $this->BookModel->getAll();
+		if (!$this->permissions['read']) {
+			$this->session->set_flashdata('error', 'Permissão negada');
+      return redirect('home');
+    }
 
-		$this->load->view('books/index', $this->data);
+		$this->load->model('BookModel');
+		$this->data[$this->functionalitySlug] = $this->BookModel->getAll();
+
+		$this->load->view($this->functionalitySlug . '/index', $this->data);
 	}
 
 	public function update (int $bookId) {
+		if (!$this->permissions['update']) {
+			$this->session->set_flashdata('error', 'Permissão negada');
+      return redirect($this->functionalitySlug);
+    }
+
 		$this->load->model('BookModel');
 		$book = $this->BookModel->getByPrimary($bookId);
 
 		if (empty($book)) {
-			return redirect('books/index');
+			return redirect($this->functionalitySlug . '/index');
 		}
 
 		$this->data['book'] = $book;
 
-		$this->load->view('books/form', $this->data);
+		$this->load->view($this->functionalitySlug . '/form', $this->data);
 	}
 
 	public function create () {
-		$this->load->view('books/form', $this->data);
+		$this->load->view($this->functionalitySlug . '/form', $this->data);
 	}
 
 	public function delete (int $bookId) {
@@ -47,7 +59,7 @@ class Books extends MainController {
 		$this->BookModel->delete($bookId);
 
 		$this->session->set_flashdata('success', 'Livro excluído com sucesso');
-		return redirect('books');
+		return redirect($this->functionalitySlug);
 	}
 
 	public function save () {

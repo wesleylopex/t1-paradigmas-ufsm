@@ -17,6 +17,14 @@ function compareHash (string $password, string $hash): bool {
   return password_verify($password, $hash);
 }
 
+function arrayToFormDropdownOptions (array $records, string $value, string $label, bool $required = true, string $emptyLabel = '') {
+  $options = $required === true ? [] : ['' => (!empty($emptyLabel) ? $emptyLabel : 'Todos os registros')];
+  foreach ($records as $record) {
+    $options[$record->$value] = $record->$label;
+  }
+  return $options;
+}
+
 function setFileName (string $fileName): string {
   $fileInfo = pathinfo($fileName);
   $extension = $fileInfo['extension'];

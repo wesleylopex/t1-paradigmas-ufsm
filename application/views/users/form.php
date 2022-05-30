@@ -30,38 +30,37 @@
               <div class="card">
                 <form id="main-form" action="<?= base_url($functionality->slug . '/save') ?>" method="post">
                   <div class="card-body p-30px">
-                    <input type="hidden" name="id" value="<?= isset($book) ? $book->id : '' ?>">
+                    <input type="hidden" name="id" value="<?= isset($record) ? $record->id : '' ?>">
                     <div class="form-row">
-                      <div class="form-group col-md-4">
-                        <label class="uppercase text-10px">Título</label>
-                        <input type="text" required class="form-control" name="title" value="<?= isset($book) ? $book->title : '' ?>">
+                      <div class="form-group col-md-3">
+                        <label class="uppercase text-10px">Nome</label>
+                        <input type="text" required class="form-control" name="name" value="<?= isset($record) ? $record->name : '' ?>">
                         <label class="error-label"></label>
                       </div>
-                      <div class="form-group col-md-4">
-                        <label class="uppercase text-10px">Nome do autor</label>
-                        <input type="text" class="form-control" name="authors_name" value="<?= isset($book) ? $book->authors_name : '' ?>">
+                      <div class="form-group col-md-3">
+                        <label class="uppercase text-10px">E-mail</label>
+                        <input type="text" required class="form-control" name="email" value="<?= isset($record) ? $record->email : '' ?>">
                         <label class="error-label"></label>
                       </div>
-                      <div class="form-group col-md-4">
-                        <label class="uppercase text-10px">Edição</label>
-                        <input type="number" class="form-control" name="edition" value="<?= isset($book) ? $book->edition : '' ?>">
+                      <div class="form-group col-md-3">
+                        <label class="uppercase text-10px">Cargo</label>
+                        <?=
+                          form_dropdown(
+                            'role_id',
+                            $roles,
+                            isset($record) ? $record->role_id : null,
+                            ['required' => true, 'class' => 'form-control']
+                          )
+                        ?>
                         <label class="error-label"></label>
                       </div>
-                      <div class="form-group col-md-4">
-                        <label class="uppercase text-10px">Editora</label>
-                        <input type="text" class="form-control" name="publisher" value="<?= isset($book) ? $book->publisher : '' ?>">
-                        <label class="error-label"></label>
-                      </div>
-                      <div class="form-group col-md-4">
-                        <label class="uppercase text-10px">ISBN</label>
-                        <input type="text" class="form-control" name="isbn" value="<?= isset($book) ? $book->isbn : '' ?>">
-                        <label class="error-label"></label>
-                      </div>
-                      <div class="form-group col-md-4">
-                        <label class="uppercase text-10px">Ano</label>
-                        <input type="number" minlength="4" maxlength="4" class="form-control" name="year" value="<?= isset($book) ? $book->year : '' ?>">
-                        <label class="error-label"></label>
-                      </div>
+                      <?php if (!isset($record) || $record->id == $user->id) : ?>
+                        <div class="form-group col-md-3">
+                          <label class="uppercase text-10px">Senha</label>
+                          <input type="password" required class="form-control" name="password">
+                          <label class="error-label"></label>
+                        </div>
+                      <?php endif ?>
                     </div>
                   </div>
                   <div class="card-action">
@@ -111,7 +110,7 @@
           return false
         }
 
-        showNotify('Livro salvo com sucesso', true)
+        showNotify('Usuário salvo com sucesso', true)
         setTimeout(() => window.location.href = `${settings.baseURL}${settings.functionality.slug}`, 2000)
       })
     }

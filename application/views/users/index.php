@@ -46,7 +46,7 @@
 											<?php if ($permissions['create']) : ?>
 												<a href="<?= base_url($functionality->slug . '/create') ?>">
 													<button data-tippy-content="Adicionar" class="bg-primary text-white rounded-sm py-1 px-2">
-														Adicionar livro
+														Adicionar usuário
 													</button>
 												</a>
 											<?php endif ?>
@@ -58,28 +58,28 @@
 										<table class="display table table-striped table-hover datatable">
 											<thead>
 												<tr>
-                          <th>Título</th>
-                          <th>Nome do(s) autor(es)</th>
-                          <th>Edição</th>
-                          <th>Editora</th>
-                          <th>ISBN</th>
-                          <th>Ano</th>
+                          <th>Nome</th>
+                          <th>Cargo</th>
+                          <th>E-mail</th>
+                          <th>Criado em</th>
                           <?php if ($permissions['delete']) : ?>
                             <th>Excluir</th>
                           <?php endif ?>
 												</tr>
 											</thead>
 											<tbody>
-												<?php foreach ($books as $book) : ?>
-                          <tr data-href="<?= base_url($functionality->slug . '/update/' . $book->id) ?>">
-                            <td data-tippy-content="Clique p/ editar"><?= $book->title ?></td>
-                            <td data-tippy-content="Clique p/ editar"><?= $book->authors_name ?></td>
-                            <td data-tippy-content="Clique p/ editar"><?= $book->edition ?></td>
-                            <td data-tippy-content="Clique p/ editar"><?= $book->publisher ?></td>
-                            <td data-tippy-content="Clique p/ editar"><?= $book->isbn ?></td>
-                            <td data-tippy-content="Clique p/ editar"><?= $book->year ?></td>
+												<?php foreach ($users as $currentUser) : ?>
+                          <tr data-href="<?= base_url($functionality->slug . '/update/' . $currentUser->id) ?>">
+                            <td data-tippy-content="Clique p/ editar"><?= $currentUser->name ?></td>
+                            <td data-tippy-content="Clique p/ editar"><?= $currentUser->role_title ?></td>
+                            <td data-tippy-content="Clique p/ editar"><?= $currentUser->email ?></td>
+                            <td data-tippy-content="Clique p/ editar"><?= date('d/m/Y H:i', strtotime($currentUser->created_at)) ?></td>
                             <?php if ($permissions['delete']) : ?>
-                              <td class="not-clickable"><a class="text-blue-600" href="<?= base_url($functionality->slug . '/delete/' . $book->id) ?>">Excluir</a></td>
+                              <td class="not-clickable">
+																<?php if ($currentUser->id != $user->id) : ?>
+																	<a class="text-blue-600" href="<?= base_url($functionality->slug . '/delete/' . $currentUser->id) ?>">Excluir</a>
+																<?php endif ?>
+															</td>
                             <?php endif ?>
 													</tr>
 												<?php endforeach ?>

@@ -22,7 +22,7 @@
       </div>
       <h1 class="text-dark font-medium text-xl">Página não encontrada</h1>
       <p class="text-gray-500 mt-2 mb-4 text-sm">Parece que a página que você está procurando não existe ou não está disponível.</p>
-      <a href="<?= base_url('manager/login') ?>">
+      <a href="<?= base_url('login') ?>">
         <button class="btn btn--primary w-full">Voltar para o Login</button>
       </a>
     </div>

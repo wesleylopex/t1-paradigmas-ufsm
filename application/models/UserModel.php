@@ -23,4 +23,13 @@ class UserModel extends MY_Model {
 
 		return false;
 	}
+
+	public function getAllWithRole (): array {
+		$users = $this->db
+			->select('users.*, roles.title as role_title')
+			->join('roles', 'roles.id = users.role_id', 'left')
+			->get($this->table, $this->field_order, $this->type_order)
+			->result();
+		return is_array($users) ? $users : [];
+	}
 }
