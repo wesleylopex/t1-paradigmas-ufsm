@@ -30,38 +30,49 @@
               <div class="card">
                 <form id="main-form" action="<?= base_url($functionality->slug . '/save') ?>" method="post">
                   <div class="card-body p-30px">
-                    <input type="hidden" name="id" value="<?= isset($book) ? $book->id : '' ?>">
+                    <input type="hidden" name="id" value="<?= isset($loan) ? $loan->id : '' ?>">
                     <div class="form-row">
-                      <div class="form-group col-md-4">
-                        <label class="uppercase text-10px">Título</label>
-                        <input type="text" required class="form-control" name="title" value="<?= isset($book) ? $book->title : '' ?>">
+                      <div class="form-group col-md-2">
+                        <label class="uppercase text-10px">Livro</label>
+                        <?=
+                          form_dropdown(
+                            'book_id',
+                            $books,
+                            isset($loan) ? $loan->book_id : null,
+                            ['required' => true, 'class' => 'form-control']
+                          )
+                        ?>
                         <label class="error-label"></label>
                       </div>
-                      <div class="form-group col-md-4">
-                        <label class="uppercase text-10px">Nome do autor</label>
-                        <input type="text" class="form-control" name="authors_name" value="<?= isset($book) ? $book->authors_name : '' ?>">
+                      <div class="form-group col-md-2">
+                        <label class="uppercase text-10px">Usuário</label>
+                        <?=
+                          form_dropdown(
+                            'user_id',
+                            $users,
+                            isset($loan) ? $loan->user_id : null,
+                            ['required' => true, 'class' => 'form-control']
+                          )
+                        ?>
                         <label class="error-label"></label>
                       </div>
-                      <div class="form-group col-md-4">
-                        <label class="uppercase text-10px">Edição</label>
-                        <input type="number" class="form-control" name="edition" value="<?= isset($book) ? $book->edition : '' ?>">
+                      <div class="form-group col-md-2">
+                        <label class="uppercase text-10px">Data de início</label>
+                        <input type="date" required class="form-control" name="created_at" value="<?= isset($loan) ? date('Y-m-d', strtotime($loan->created_at)) : '' ?>">
                         <label class="error-label"></label>
                       </div>
-                      <div class="form-group col-md-4">
-                        <label class="uppercase text-10px">Editora</label>
-                        <input type="text" class="form-control" name="publisher" value="<?= isset($book) ? $book->publisher : '' ?>">
+                      <div class="form-group col-md-2">
+                        <label class="uppercase text-10px">Data de fim</label>
+                        <input type="date" required class="form-control" name="expires_at" value="<?= isset($loan) ? date('Y-m-d', strtotime($loan->expires_at)) : '' ?>">
                         <label class="error-label"></label>
                       </div>
-                      <div class="form-group col-md-4">
-                        <label class="uppercase text-10px">ISBN</label>
-                        <input type="text" class="form-control" name="isbn" value="<?= isset($book) ? $book->isbn : '' ?>">
-                        <label class="error-label"></label>
-                      </div>
-                      <div class="form-group col-md-4">
-                        <label class="uppercase text-10px">Ano</label>
-                        <input type="number" minlength="4" maxlength="4" class="form-control" name="year" value="<?= isset($book) ? $book->year : '' ?>">
-                        <label class="error-label"></label>
-                      </div>
+                      <?php if (isset($loan)) : ?>
+                        <div class="form-group col-md-2">
+                          <label class="uppercase text-10px">Data do retorno</label>
+                          <input type="date" class="form-control" name="returned_at" value="<?= !empty($loan->returned_at) ? date('Y-m-d', strtotime($loan->returned_at)) : '' ?>">
+                          <label class="error-label"></label>
+                        </div>
+                      <?php endif ?>
                     </div>
                   </div>
                   <div class="card-action">
@@ -109,7 +120,7 @@
           return false
         }
 
-        showNotify('Livro salvo com sucesso', true)
+        showNotify('Empréstimo salvo com sucesso', true)
         setTimeout(() => window.location.href = `${settings.baseURL}${settings.functionality.slug}`, 2000)
       })
     }

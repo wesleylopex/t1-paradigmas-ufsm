@@ -103,8 +103,6 @@
           body: new FormData(form)
         }).then(response => response.json())
 
-        console.log(response)
-
         if (response.success !== true) {
           showNotify(response.error, false)
           return false
