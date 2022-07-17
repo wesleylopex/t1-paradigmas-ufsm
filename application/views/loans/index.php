@@ -45,8 +45,8 @@
 										<div class="d-flex align-items-center justify-content-end">
 											<?php if ($permissions['create']) : ?>
 												<a href="<?= base_url($functionality->slug . '/create') ?>">
-													<button data-tippy-content="Adicionar" class="bg-primary text-white rounded-sm py-1 px-2">
-														Adicionar livro
+													<button data-tippy-content="Criar" class="bg-primary text-white rounded-sm py-1 px-2">
+														Criar empréstimo
 													</button>
 												</a>
 											<?php endif ?>
