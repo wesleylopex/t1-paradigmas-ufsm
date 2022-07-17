@@ -26,6 +26,6 @@
   - bianca@gmail.com
   - bianca
 
-O sistema tem níveis de usuário (administrador, professor e aluno)
-Cada usuário tem permissão p/ algumas funcionalidades (administrador tem permissão pra tudo)
+O sistema tem níveis de usuário (administrador, professor e aluno).
+Cada usuário tem permissão p/ algumas funcionalidades (administrador tem permissão pra tudo).
 É possível criar usuários, livros e empréstimos. Alterar e excluir todos esses registros
